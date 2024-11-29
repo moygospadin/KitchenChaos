@@ -3,33 +3,23 @@ using UnityEngine;
 public class KitchenObject : MonoBehaviour {
     [SerializeField] private KitchenObjectsSO KitchenObjectsSO;
 
-
-
-
-
     private IKitchenObjectParent kitchenObjectParent;
 
     public KitchenObjectsSO GetKitchenObjectSO() {
         return KitchenObjectsSO;
     }
 
-
-
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
 
         if (this.kitchenObjectParent != null) {
-
             this.kitchenObjectParent.ClearKitchenObject();
         }
 
-
-
-
         this.kitchenObjectParent = kitchenObjectParent;
         if (kitchenObjectParent.HastKitchenObject()) {
-
             Debug.LogError("kitchenObjectParent already has a KitchenObject");
         }
+
         kitchenObjectParent.SetKitchenObject(this);
 
         transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();

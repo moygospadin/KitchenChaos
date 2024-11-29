@@ -29,7 +29,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent {
 
     private void Awake() {
         if (Instance != null) {
-            Debug.LogError("SOMETHING GO WRONG, not single user");
+            Debug.LogError("SOMETHING GO WRONG, not single player");
         }
         Instance = this;
     }

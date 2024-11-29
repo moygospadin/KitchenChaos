@@ -10,27 +10,20 @@ public class ClearCounter : BaseCounter {
         if (!HastKitchenObject()) {
 
             if (player.HastKitchenObject()) {
-
                 player.GetKitchenObject().SetKitchenObjectParent(this);
-            } else {
-
+            }
+            else {
                 //Player not carrying anything
             }
-
-        } else {
+        }
+        else {
             if (player.HastKitchenObject()) {
                 //Player is carrying anything
-            } else {
+            }
+            else {
                 //Player not carrying anything
                 GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
-
-
     }
-
-
-
-
-
 }
