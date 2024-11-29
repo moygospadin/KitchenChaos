@@ -43,11 +43,26 @@ public class KitchenObject : MonoBehaviour {
         IKitchenObjectParent kitchenObjectParent
         ) {
 
-        Transform kithechObjectTransoform = Instantiate(kitchenObjectsSO.prefab);
-        KitchenObject kitchenObject = kithechObjectTransoform.GetComponent<KitchenObject>();
+        Transform kithechObjectTransform = Instantiate(kitchenObjectsSO.prefab);
+        KitchenObject kitchenObject = kithechObjectTransform.GetComponent<KitchenObject>();
 
         kitchenObject.SetKitchenObjectParent(kitchenObjectParent);
 
         return kitchenObject;
+    }
+
+
+    public bool TryGetPlate(out PlateKitchenObject plateKitchenObject) {
+
+
+
+        if (this is PlateKitchenObject) {
+            plateKitchenObject = this as PlateKitchenObject;
+            return true;
+        }
+        else {
+            plateKitchenObject = null;
+            return false;
+        }
     }
 }
