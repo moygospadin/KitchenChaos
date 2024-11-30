@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour,IKitchenObjectParent {
+public class Player : MonoBehaviour, IKitchenObjectParent {
 
 
 
-    public static Player Instance { get; private set; }
+    public static Player Instance {
+        get; private set;
+    }
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs {
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour,IKitchenObjectParent {
     [SerializeField] private LayerMask countersLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
-
+    public event EventHandler OnPickSmth;
     private bool isWalking = false;
     private Vector3 lastInteractDir;
     private BaseCounter selectedCounter;
@@ -83,10 +85,12 @@ public class Player : MonoBehaviour,IKitchenObjectParent {
                     SetSelectedCounter(baseCounter);
                 }
 
-            } else {
+            }
+            else {
                 SetSelectedCounter(null);
             }
-        } else {
+        }
+        else {
             SetSelectedCounter(null);
         }
 
@@ -123,7 +127,8 @@ public class Player : MonoBehaviour,IKitchenObjectParent {
             if (canMove) {
                 //Can move only on the x
                 moveDir = moveDirX;
-            } else {
+            }
+            else {
                 //Cannot move X
 
                 //Atemp onlyz movement
@@ -163,6 +168,9 @@ public class Player : MonoBehaviour,IKitchenObjectParent {
 
     public void SetKitchenObject(KitchenObject kitchenObject) {
         this.kitchenObject = kitchenObject;
+        if (kitchenObject != null) {
+            OnPickSmth?.Invoke(this, EventArgs.Empty);
+        }
     }
 
 

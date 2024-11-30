@@ -5,6 +5,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
 
     [SerializeField] private Transform counterTopPoint;
 
+    public static event EventHandler OnAnyPlace;
     private KitchenObject kitchenObject;
 
     public virtual void Interact(Player player) {
@@ -13,13 +14,17 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
     public virtual void InteractAlternative(Player player) {
         //Debug.LogError("Base counter.InteractAlternative()");
     }
-    
+
     public Transform GetKitchenObjectFollowTransform() {
         return counterTopPoint;
     }
 
     public void SetKitchenObject(KitchenObject kitchenObject) {
         this.kitchenObject = kitchenObject;
+        if (kitchenObject != null) {
+
+            OnAnyPlace?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public KitchenObject GetKitchenObject() {

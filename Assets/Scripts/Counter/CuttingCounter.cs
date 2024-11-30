@@ -9,7 +9,7 @@ public class CuttingCounter : BaseCounter, IHasProgress {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public event EventHandler OnCut;
-
+    public static event EventHandler OnAnyCut;
 
     public override void Interact(Player player) {
 
@@ -66,6 +66,7 @@ public class CuttingCounter : BaseCounter, IHasProgress {
 
 
             OnCut?.Invoke(this, EventArgs.Empty);
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
             CuttingReciepeSO cuttingReciepeSO = GetCuttingRecipeSOWithInput(inputKitchenObjectSo);
 
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {

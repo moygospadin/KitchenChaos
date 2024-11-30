@@ -16,6 +16,9 @@ public class DeliveryManager : MonoBehaviour {
 
     public event EventHandler OnRecipeSpawn;
     public event EventHandler OnRecipeCompleted;
+    public event EventHandler OnRecipeSuccess;
+    public event EventHandler OnRecipeFailed;
+
 
     private float spawnRecipeTimer;
     private float spawnRecipeTimerMax = 4f;
@@ -80,12 +83,13 @@ public class DeliveryManager : MonoBehaviour {
 
                     waitingRecipeSOList.RemoveAt(i);
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                    OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
         }
         //No matches found
-
+        OnRecipeFailed?.Invoke(this, EventArgs.Empty);
 
     }
 
