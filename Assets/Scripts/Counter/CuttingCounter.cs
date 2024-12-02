@@ -10,7 +10,15 @@ public class CuttingCounter : BaseCounter, IHasProgress {
 
     public event EventHandler OnCut;
     public static event EventHandler OnAnyCut;
+    //ALWAYS CLEAR static events, they don't auto cleared after scene unmounting
 
+    new public static void ResetStaticData() {
+        OnAnyCut = null;
+    }
+
+    //private void OnDestroy() {
+    //    OnAnyCut = null;
+    //}
     public override void Interact(Player player) {
 
         if (!HastKitchenObject()) {
